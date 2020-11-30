@@ -27,17 +27,13 @@ int findMaxLength(string input[], int n)
 bool compare(string A, string B, int index){
     char ach = 'a' ,bch = 'a';
     // totalComparisons++;
-    if(A.length() > index){
-        ach = A[index];
+    if(A.length() > index && B.length() > index){
+        totalComparisons++;
+        return A[index]<=B[index];
+    }else if(B.length() < A.length()){
+        return false;
     }
-
-    // totalComparisons++;
-    if(B.length() > index){
-        bch = B[index];
-    }
-    
-    // totalComparisons++;
-    return ach<=bch;
+    return true;
 }
 void merge(string input[],int index,int l, int mid, int r){
     int i, j, k, nl, nr;
@@ -55,7 +51,7 @@ void merge(string input[],int index,int l, int mid, int r){
     
     //marge temp arrays to real array
     while(i < nl && j<nr) {
-        totalComparisons++;
+        // totalComparisons++;
         if(compare(larr[i] , rarr[j], index)) {
             input[k] = larr[i];
             i++;
@@ -122,20 +118,20 @@ void readFile(string filePath){
     
         duration<double, milli> time_span = stopTime - startTime;
     
-        cout << "[RADIX MERGE SORT]["<< filePath<<"] Duration>> " << time_span.count() << " milliseconds.\n";
-        // cout << "[RADIX MERGE SORT][n="<< n <<"] Total Comparisons>> " << totalComparisons <<"\n";
+        // cout << "[RADIX MERGE SORT]["<< filePath<<"] Duration>> " << time_span.count() << " milliseconds.\n";
+        cout << "[RADIX MERGE SORT][n="<< n <<"] Total Comparisons>> " << totalComparisons <<"\n";
         
     }
 }
 int main(int argc,char *argv[]){
     // int n, k; cin >> n; k=n;
-    // vector<string> input(n, "");
+    // string input[n];
     // while(k--){
     //     cin >> input[n-1-k];
     // }
 
-    // high_resolution_clock::time_point startTime = high_resolution_clock::now();
-    // radixSortString(input);
+    // // high_resolution_clock::time_point startTime = high_resolution_clock::now();
+    // radixSortString(input, n);
 
 
     // high_resolution_clock::time_point stopTime = high_resolution_clock::now();
@@ -144,7 +140,7 @@ int main(int argc,char *argv[]){
  
     // cout << "[RADIX SORT] Duration>> " << time_span.count() << " milliseconds.\n";
 
-    string BASE_PATH = "";
+    // string BASE_PATH = "";
 
-    readFile(BASE_PATH + argv[1]);
+    readFile(argv[1]);
 }
